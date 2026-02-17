@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:5000");
+const socket = io("https://real-time-poll-rooms-qqbp.onrender.com");
 
 export default function PollRoom() {
 
@@ -42,7 +42,7 @@ export default function PollRoom() {
   ==============================
   */
   const fetchPoll = async () => {
-    const res = await axios.get(`http://localhost:5000/api/poll/${id}`);
+    const res = await axios.get(`https://real-time-poll-rooms-qqbp.onrender.com/api/poll/${id}`);
     setPoll(res.data);
     setLoading(false);
   };
@@ -66,7 +66,7 @@ export default function PollRoom() {
 
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/poll/vote/${id}`,
+        `https://real-time-poll-rooms-qqbp.onrender.com/api/poll/vote/${id}`,
         { optionIndex: index, voterId }
       );
 

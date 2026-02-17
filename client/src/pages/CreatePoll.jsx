@@ -8,7 +8,7 @@ export default function CreatePoll() {
 
   const createPoll = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/api/poll/create", {
+      const res = await axios.post("https://real-time-poll-rooms-qqbp.onrender.com/api/poll/create", {
         question,
         options
       });
