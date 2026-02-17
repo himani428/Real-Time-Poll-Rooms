@@ -13,55 +13,73 @@ const app = express();
 const server = http.createServer(app);
 
 /*
-================================================
-ALLOWED ORIGINS (LOCAL + PRODUCTION FRONTEND)
-================================================
-Add your Vercel URL here after deployment
+====================================================
+ALLOW LOCAL + ALL VERCEL DEPLOYMENTS
+====================================================
 */
 const allowedOrigins = [
   "http://localhost:5173",
-  "http://localhost:3000",
-  process.env.FRONTEND_URL // set this in Render env after Vercel deploy
-].filter(Boolean);
+  "http://localhost:3000"
+];
 
 /*
-================================================
-SOCKET.IO CONFIG
-================================================
+Check if origin is allowed
+*/
+function corsOrigin(origin, callback) {
+
+  if (!origin) return callback(null, true);
+
+  // allow localhost
+  if (allowedOrigins.includes(origin)) {
+    return callback(null, true);
+  }
+
+  // allow ANY vercel deployment of your project
+  if (origin.includes("vercel.app")) {
+    return callback(null, true);
+  }
+
+  callback(new Error("Not allowed by CORS"));
+}
+
+/*
+====================================================
+SOCKET.IO
+====================================================
 */
 const io = new Server(server, {
   cors: {
-    origin: allowedOrigins,
+    origin: corsOrigin,
     methods: ["GET", "POST"],
     credentials: true
   }
 });
 
 /*
-================================================
+====================================================
 EXPRESS MIDDLEWARE
-================================================
+====================================================
 */
 app.use(cors({
-  origin: allowedOrigins,
+  origin: corsOrigin,
   credentials: true
 }));
 
 app.use(express.json());
 
 /*
-================================================
-HEALTH CHECK ROUTE (FIXES CANNOT GET /)
-================================================
+====================================================
+HEALTH CHECK
+====================================================
 */
 app.get("/", (req, res) => {
   res.send("Real-Time Poll API running 🚀");
 });
 
 /*
-================================================
+====================================================
 MAKE SOCKET AVAILABLE IN ROUTES
-================================================
+====================================================
 */
 app.use((req, res, next) => {
   req.io = io;
@@ -69,23 +87,23 @@ app.use((req, res, next) => {
 });
 
 /*
-================================================
-API ROUTES
-================================================
+====================================================
+ROUTES
+====================================================
 */
 app.use("/api/poll", pollRoutes);
 
 /*
-================================================
+====================================================
 SOCKET HANDLER
-================================================
+====================================================
 */
 setupSocket(io);
 
 /*
-================================================
+====================================================
 START SERVER
-================================================
+====================================================
 */
 const PORT = process.env.PORT || 5000;
 
