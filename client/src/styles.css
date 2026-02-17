@@ -1,0 +1,630 @@
+/* ---------- RESET ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+/* ---------- BACKGROUND ---------- */
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(
+    -45deg,
+    #667eea,
+    #764ba2,
+    #6dd5ed,
+    #2193b0
+  );
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50% }
+  50% { background-position: 100% 50% }
+  100% { background-position: 0% 50% }
+}
+
+/* ---------- CARD ---------- */
+.container {
+  width: 420px;
+  padding: 35px;
+  border-radius: 18px;
+
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(16px);
+
+  box-shadow:
+    0 20px 40px rgba(0,0,0,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.3);
+
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- TITLE ---------- */
+h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: white;
+  font-weight: 600;
+}
+
+/* ---------- INPUT ---------- */
+input {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 8px 0;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+
+  background: rgba(255,255,255,0.85);
+  transition: 0.25s;
+}
+
+input:focus {
+  transform: scale(1.02);
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.35);
+}
+
+/* ---------- BUTTON ---------- */
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+
+  background: linear-gradient(135deg,#667eea,#764ba2);
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+
+  transition: 0.25s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+/* ---------- SHARE LINK ---------- */
+.share {
+  margin-top: 18px;
+  color: white;
+  font-size: 14px;
+  word-break: break-all;
+}
+
+.share a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* ---------- COPY BUTTON ---------- */
+.copy-btn {
+  margin-top: 8px;
+  background: #22c55e;
+}
+
+.copy-btn:hover {
+  background: #16a34a;
+}
+
+/* ---------- POLL OPTION ---------- */
+.option {
+  margin: 12px 0;
+}
+
+/* ---------- PROGRESS BAR ---------- */
+.progress-container {
+  background: rgba(255,255,255,0.25);
+  border-radius: 12px;
+  overflow: hidden;
+  height: 40px;
+  position: relative;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.progress-container:hover {
+  transform: scale(1.02);
+}
+
+.progress-bar {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 500;
+  background: linear-gradient(135deg,#667eea,#764ba2);
+  transition: width 0.6s ease;
+}
+
+.vote-count {
+  position: absolute;
+  right: 12px;
+  top: 10px;
+  font-size: 13px;
+  color: white;
+}
+
+/* ---------- LOADING ---------- */
+.loader {
+  border: 4px solid rgba(255,255,255,0.3);
+  border-top: 4px solid white;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  margin: 20px auto;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===============================
+   PREMIUM SHARE LINK CARD
+================================*/
+
+.share-card {
+  position: relative;
+  margin-top: 24px;
+  padding: 22px 20px 20px;
+
+  border-radius: 16px;
+
+  background: rgba(255,255,255,0.14);
+  backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255,255,255,0.25);
+
+  box-shadow:
+    0 15px 35px rgba(0,0,0,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.3);
+
+  animation: shareFade .45s ease;
+  transition: 0.35s;
+}
+
+/* glow border */
+.share-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 16px;
+  background: linear-gradient(120deg,#667eea,#6dd5ed,#764ba2);
+  opacity: 0.35;
+  filter: blur(12px);
+  z-index: -1;
+}
+
+/* hover lift */
+.share-card:hover {
+  transform: translateY(-4px) scale(1.01);
+}
+
+/* title */
+.share-card h3 {
+  font-size: 18px;
+  color: white;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* description text */
+.share-card p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.8);
+  margin-top: 10px;
+}
+
+/* ===============================
+   LINK INPUT
+================================*/
+
+.share-card input {
+  width: 100%;
+  margin-top: 6px;
+  padding: 12px 14px;
+
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.3);
+
+  background: rgba(255,255,255,0.85);
+  font-size: 13px;
+
+  transition: 0.25s;
+}
+
+.share-card input:focus {
+  outline: none;
+  border-color: #6dd5ed;
+  box-shadow: 0 0 0 3px rgba(109,213,237,0.35);
+}
+
+/* ===============================
+   COPY BUTTON (PREMIUM)
+================================*/
+
+.share-card button {
+  margin-top: 12px;
+
+  background: linear-gradient(135deg,#22c55e,#16a34a);
+  font-weight: 600;
+  letter-spacing: .3px;
+}
+
+.share-card button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(34,197,94,0.45);
+}
+
+/* ===============================
+   ANIMATION
+================================*/
+
+@keyframes shareFade {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+.share-card h3 {
+  color:white;
+  margin-bottom:10px;
+}
+
+.share-card input {
+  width:100%;
+  margin-top:8px;
+}
+
+/* =====================================
+   POLL ROOM PREMIUM UI
+=====================================*/
+
+.poll-room {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.poll-room p {
+  text-align: center;
+  color: rgba(255,255,255,0.85);
+  margin-top: -5px;
+  margin-bottom: 5px;
+}
+
+
+
+/* title */
+.poll-title {
+  font-size: 26px;
+  margin-bottom: 8px;
+}
+
+/* total votes */
+.total-votes {
+  text-align: center;
+  margin-bottom: 20px;
+  color: rgba(255,255,255,0.8);
+  font-size: 14px;
+}
+
+/* each option */
+.poll-option {
+  margin-bottom: 14px;
+}
+
+/* bar container */
+.poll-bar-wrapper {
+  position: relative;
+  height: 54px;
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(10px);
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.poll-bar-wrapper:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+}
+
+/* animated fill */
+.poll-bar-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+
+  width: 0%;
+  border-radius: 14px;
+
+  background: linear-gradient(135deg,#6dd5ed,#667eea,#764ba2);
+  background-size: 200% 200%;
+  animation: gradientShift 5s ease infinite;
+
+  transition: width 0.7s cubic-bezier(.4,0,.2,1);
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50% }
+  50% { background-position: 100% 50% }
+  100% { background-position: 0% 50% }
+}
+
+
+/* content inside bar */
+.poll-bar-content {
+  position: relative;
+  z-index: 2;
+
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 18px;
+  font-weight: 500;
+  color: white;
+  font-size: 15px;
+}
+
+
+/* option label */
+.poll-option-text {
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+/* vote stats */
+.poll-option-stats {
+  color: rgba(255,255,255,0.9);
+  font-size: 13px;
+}
+.poll-bar-fill {
+  pointer-events: none;
+}
+.poll-bar-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+.poll-bar-fill {
+  pointer-events:none;
+}
+
+.poll-bar-wrapper.disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+  transform: none;
+}
+
+.poll-bar-fill {
+  pointer-events:none;
+}
+
+.poll-bar-wrapper.disabled {
+  opacity:0.6;
+  cursor:not-allowed;
+}
+
+
+@media (max-width:480px){
+  .container{
+    width:90%;
+    padding:25px;
+  }
+
+  .poll-bar-wrapper{
+    height:48px;
+  }
+}
+
+.poll-bar-wrapper.winner {
+  box-shadow: 0 0 18px rgba(120,180,255,0.6);
+}
+
+
+/* ===============================
+POLL ROOM LAYOUT
+=============================== */
+.poll-room{
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+}
+
+/* ===============================
+TITLE
+=============================== */
+.poll-room h1{
+  font-size:28px;
+  font-weight:600;
+  letter-spacing:.3px;
+}
+
+.poll-room p{
+  text-align:center;
+  opacity:.9;
+  font-size:14px;
+}
+
+/* ===============================
+OPTION WRAPPER
+=============================== */
+.poll-bar-wrapper{
+  position:relative;
+  height:58px;
+  border-radius:16px;
+  overflow:hidden;
+  cursor:pointer;
+
+  background:rgba(255,255,255,0.18);
+  backdrop-filter:blur(14px);
+
+  transition:all .25s ease;
+}
+
+.poll-bar-wrapper:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 25px rgba(0,0,0,.25);
+}
+
+/* ===============================
+WINNER GLOW
+=============================== */
+.poll-bar-wrapper.winner{
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.25),
+    0 0 25px rgba(120,180,255,.55),
+    inset 0 0 20px rgba(255,255,255,.08);
+}
+
+/* ===============================
+PROGRESS FILL
+=============================== */
+.poll-bar-fill{
+  position:absolute;
+  left:0;
+  top:0;
+  bottom:0;
+  width:0%;
+
+  background:linear-gradient(
+    135deg,
+    #6dd5ed,
+    #667eea,
+    #764ba2,
+    #6dd5ed
+  );
+
+  background-size:300% 300%;
+  animation:flow 8s ease infinite;
+
+  transition:width .9s cubic-bezier(.22,1,.36,1);
+}
+
+@keyframes flow{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* ===============================
+TEXT CONTENT
+=============================== */
+.poll-bar-content{
+  position:relative;
+  z-index:2;
+  height:100%;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:0 20px;
+  color:white;
+  font-weight:500;
+}
+
+.option-left{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.option-percent{
+  font-size:13px;
+  opacity:.85;
+}
+
+/* ===============================
+DISABLED
+=============================== */
+.poll-bar-wrapper.disabled{
+  cursor:not-allowed;
+  opacity:.7;
+  transform:none;
+}
+
+/* ===============================
+CLICK RIPPLE EFFECT
+=============================== */
+.poll-bar-wrapper::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle,rgba(255,255,255,.35) 10%,transparent 10%);
+  transform:scale(0);
+  opacity:0;
+  transition:transform .4s, opacity .4s;
+}
+
+.poll-bar-wrapper:active::after{
+  transform:scale(4);
+  opacity:1;
+  transition:0s;
+}
+
+/* ===============================
+LOADING SKELETON
+=============================== */
+.skeleton{
+  height:55px;
+  border-radius:14px;
+  background:linear-gradient(
+    90deg,
+    rgba(255,255,255,.12) 25%,
+    rgba(255,255,255,.25) 50%,
+    rgba(255,255,255,.12) 75%
+  );
+  background-size:200% 100%;
+  animation:shimmer 1.4s infinite;
+}
+
+@keyframes shimmer{
+  0%{background-position:200% 0}
+  100%{background-position:-200% 0}
+}
+
+/* ===============================
+MOBILE
+=============================== */
+@media(max-width:480px){
+  .container{
+    width:92%;
+    padding:25px;
+  }
+}
